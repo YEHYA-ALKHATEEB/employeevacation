@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{% endif %}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col-6">
+        <h4> Login </h4>
+        <form id="loginForm" method="POST">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" minlength="8" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+        </form>
+
+        Not Registered ? <a href="{% url 'register' %}">register now</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#loginForm').validate({
+            rules: {
+                password: {
+                    minlength: 8
+                },
+                username: {
+                    minlength: 5,
+                    
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
